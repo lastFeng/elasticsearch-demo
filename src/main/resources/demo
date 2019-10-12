@@ -1,0 +1,69 @@
+RestClient01Test：
+PUT /demo
+{
+    "mappings":{
+        "demo":{
+            "properties":{
+                "title":{
+                    "type":"text"
+                },
+                "tag":{
+                    "type":"keyword"
+                },
+                "publishTime":{
+                    "type":"date"
+                }
+            }
+        }
+    }
+}
+
+RestClient02Test：
+索引映射
+PUT /demo2
+{
+      "settings":{
+            "number_of_shards":3,
+            "number_of_replicas":1
+    },
+    "mappings":{
+        "demo2":{
+            "properties":{
+                "title":{
+                    "type":"text",
+                     "analyzer": "ik_max_word"
+                },
+                "content":{
+                    "type":"text",
+                     "analyzer": "ik_max_word"
+                },
+                "uniqueId":{
+                    "type":"keyword",
+                    "index":false
+                },
+                "created":  {
+                    "type":   "date",
+                    "format": "strict_date_optional_time||epoch_millis"
+                }
+            }
+        }
+    }
+}
+
+类型映射
+POST /demo2/sports/_mapping
+{
+    "properties":{
+        "content":{
+            "type":"text",
+            "analyzer":"ik_max_word",
+            "index":"analyzed"
+        }
+    }
+}
+
+
+
+http: https://blog.csdn.net/paditang/article/details/78802799
+      https://blog.csdn.net/paditang/article/details/78970445
+      https://blog.csdn.net/paditang/article/details/79172837
